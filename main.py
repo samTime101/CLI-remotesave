@@ -27,7 +27,7 @@ def fetch_data(endpoint):
 
   
 def user_input():
-    user = input("<double space to exit> path: ")
+    user = input("<double space to exit> <ENTER to see spaces> path: ")
     if '  ' in user:
         main()
     fetch_data(user)
