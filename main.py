@@ -2,7 +2,9 @@
 # Author : SAMIP REGMI
 # Jan 29 2:18 PM
 
+# html escape garna , for codes
 import requests
+import html
 # for hidden pass input
 from getpass import getpass
 
@@ -85,6 +87,13 @@ def write_content():
             except Exception as e:
                 print(e)
         space_password = getpass("Enter space password: ")
+        try:
+            user_escape = input("'y' to escape , Enter to default: ").lower()
+            if user_escape == 'y':
+                content = html.escape(content)
+        except Exception as e:
+            print(e)
+            return
         if ' ' in space_name or not space_name or not space_password or ' ' in target or not target:
             raise Exception("ERROR")
         url = f"{address}/write/{space_name}/{space_password}/{target}"
@@ -108,6 +117,13 @@ def edit_content():
             print(e)
             return
         space_password = getpass("Enter admin password: ")
+        try:
+            user_escape = input("'y' to escape , Enter to default: ").lower()
+            if user_escape == 'y':
+                content = html.escape(content)
+        except Exception as e:
+            print(e)
+            return
         if ' ' in space_name or not space_name or not space_password or ' ' in target or not target:
             raise Exception("ERROR")
         url = f"{address}/edit/{space_name}/{target}"
