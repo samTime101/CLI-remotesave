@@ -1,3 +1,6 @@
+# FEB 4 : updated the /write , sent JSON data instead
+
+
 # CLI for remote save
 # Author : SAMIP REGMI
 # Jan 29 2:18 PM
@@ -27,7 +30,7 @@ def fetch_data(endpoint):
 #        print("Error from fetch")
 #        return
 
-  
+
 def user_input():
     user = input("<double space to exit> <ENTER to see spaces> path: ")
     if '  ' in user:
@@ -35,7 +38,7 @@ def user_input():
     fetch_data(user)
 
 def create_space():
-    try:    
+    try:
         space_name = input("Enter space name: ")
         space_password = getpass("Enter space password: ")
         if ' ' in space_name or not space_name or not space_password:
@@ -50,7 +53,7 @@ def create_space():
         return
 
 def create_subspace():
-    try:    
+    try:
         space_name = input("Enter path: ")
         target = input("Enter subspace name: ")
         space_password = getpass("Enter space password: ")
@@ -67,7 +70,7 @@ def create_subspace():
 
 
 def write_content():
-    try:    
+    try:
         space_name = input("Enter path: ")
         #target = input("Enter file name: ")
         while True:
@@ -96,9 +99,10 @@ def write_content():
             return
         if ' ' in space_name or not space_name or not space_password or ' ' in target or not target:
             raise Exception("ERROR")
-        url = f"{address}/write/{space_name}/{space_password}/{target}"
-        headers = {"Content-Type": "text/plain"}
-        response = requests.post(url, headers=headers, data=content)
+        url = f"{address}/write/{space_name}/{target}"
+        headers = {"Content-Type": "application/json"}
+        json_data = {"password":space_password,"content":content}
+        response = requests.post(url, headers=headers, json=json_data)
         print(response)
         main()
     except Exception as e:
@@ -106,7 +110,7 @@ def write_content():
         return
 
 def edit_content():
-    try:    
+    try:
         space_name = input("Enter path: ")
         target = input("Enter file name you wanna edit: ")
         file_content_to_be_sent = input("Enter filename whose content u wanna send: ")
