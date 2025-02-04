@@ -140,6 +140,7 @@ def edit_content():
         print(e)
         return
 def main():
+    print("FEB 4:\n")
     user_choice = int(input('1 for fetching data\n2 for creating space\n3 for creating subspace\n4 write content\n5 edit content(via upload)\n6 exit: '))
     try:
         if user_choice == 1:
